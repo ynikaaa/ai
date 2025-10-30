@@ -1,150 +1,160 @@
 <!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Countdown to 25.01.2026</title>
-  <style>
-    body{
-      margin:0;
-      background:#f9f9f9;
-      height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      font-family:'Inter',sans-serif;
-      color:#e53935;
-      text-align:center;
-      overflow:hidden;
-    }
-    .timer{
-      font-size:72px;
-      font-weight:700;
-      letter-spacing:2px;
-      text-shadow:1px 1px 4px rgba(0,0,0,0.1);
-      z-index:2;
-    }
-    .quote{
-      margin-top:20px;
-      font-size:20px;
-      max-width:700px;
-      color:#333;
-      background:rgba(255,255,255,0.7);
-      padding:15px 20px;
-      border-radius:10px;
-      z-index:2;
-    }
-    .image-container{
-      position:fixed;
-      width:80%;
-      height:100%;
-      overflow:hidden;
-      z-index:1;
-    }
-    .image-container img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      opacity:0.2;
-    }
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Countdown to 25.01.2026</title>
+    <style>
+        /* Основні стилі тіла сторінки */
+        body{
+            margin:0;
+            background:#f9f9f9;
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            font-family:'Inter',sans-serif;
+            color:#e53935; /* Червоний колір для таймера */
+            text-align:center;
+            overflow:hidden;
+        }
+        /* Стилі для відображення таймера */
+        .timer{
+            font-size:72px;
+            font-weight:700;
+            letter-spacing:2px;
+            text-shadow:1px 1px 4px rgba(0,0,0,0.1);
+            z-index:2; /* Поверх інших елементів */
+        }
+        /* Стилі для блоку цитат */
+        .quote{
+            margin-top:20px;
+            font-size:20px;
+            max-width:700px;
+            color:#333;
+            background:rgba(255,255,255,0.7); /* Напівпрозорий білий фон */
+            padding:15px 20px;
+            border-radius:10px;
+            z-index:2;
+        }
+        /* Контейнер для фонового зображення */
+        .image-container{
+            position:fixed;
+            width:80%;
+            height:100%;
+            overflow:hidden;
+            z-index:1; /* Під контентом (таймером і цитатою) */
+        }
+        .image-container img{
+            width:100%;
+            height:100%;
+            object-fit:cover; /* Забезпечує покриття всієї області */
+            opacity:0.2; /* Зробити зображення напівпрозорим */
+        }
+    </style>
 </head>
 <body>
- 
-  <div class="timer" id="countdown">00:00:00</div>
-  <div class="quote" id="quote"></div>
-   <div class="image-container">
-    <img src="./image.jpg" alt="AI money cloud">
-  </div>
+    
+    <div class="timer" id="countdown">00:00:00</div>
+    
+    <div class="quote" id="quote"></div>
+    
+    <div class="image-container">
+        <img src="./image.jpg" alt="AI money cloud">
+    </div>
 
-  <script>
-    const generalQuotes = [
-      "Кожен день — це новий шанс зробити крок до мрії.",
-      "Сила команди починається з довіри і поваги.",
-      "Дій сьогодні — і завтра подякуєш собі.",
-      "Маленькі зусилля щодня створюють великі зміни.",
-      "Віра в себе — найкраща інвестиція.",
-      "Зміни починаються з тебе.",
-      "Коли здається, що все проти тебе — літак злітає проти вітру.",
-      "Кожен день — можливість створити щось нове.",
-      "Успіх приходить до тих, хто не боїться помилятися.",
-      "Почни з малого — і великі зміни прийдуть.",
-      "Працюй із задоволенням — і результат здивує.",
-      "Навіть один щирий крок уперед — це вже прогрес.",
-      "Не шукай ідеальний момент — створи його.",
-      "Мрії здійснюються, коли ти не здаєшся.",
-      "Твоя праця надихає інших.",
-      "Кожен день — це новий старт.",
-      "Будь причиною позитивних змін.",
-      "Найкращий час діяти — зараз.",
-      "Роби те, що любиш, і ти не працюватимеш жодного дня.",
-      "Сьогодні — гарний день для нових ідей.",
-      "Кожна маленька перемога веде до великого тріумфу.",
-      "Вдосконалюй себе — і світ вдосконалиться разом з тобою.",
-      "Віра в команду — ключ до успіху.",
-      "Твоя енергія творить атмосферу.",
-      "Не бійся почати з початку.",
-      "Працюй серцем, і результат перевершить очікування."
-    ];
+    <script>
+        // --- Цитати ---
+        const generalQuotes = [
+            "Кожен день — це новий шанс зробити крок до мрії.",
+            "Сила команди починається з довіри і поваги.",
+            "Дій сьогодні — і завтра подякуєш собі.",
+            "Маленькі зусилля щодня створюють великі зміни.",
+            "Віра в себе — найкраща інвестиція.",
+            "Зміни починаються з тебе.",
+            "Коли здається, що все проти тебе — літак злітає проти вітру.",
+            "Кожен день — можливість створити щось нове.",
+            "Успіх приходить до тих, хто не боїться помилятися.",
+            "Почни з малого — і великі зміни прийдуть.",
+            "Працюй із задоволенням — і результат здивує.",
+            "Навіть один щирий крок уперед — це вже прогрес.",
+            "Не шукай ідеальний момент — створи його.",
+            "Мрії здійснюються, коли ти не здаєшся.",
+            "Твоя праця надихає інших.",
+            "Кожен день — це новий старт.",
+            "Будь причиною позитивних змін.",
+            "Найкращий час діяти — зараз.",
+            "Роби те, що любиш, і ти не працюватимеш жодного дня.",
+            "Сьогодні — гарний день для нових ідей.",
+            "Кожна маленька перемога веде до великого тріумфу.",
+            "Вдосконалюй себе — і світ вдосконалиться разом з тобою.",
+            "Віра в команду — ключ до успіху.",
+            "Твоя енергія творить атмосферу.",
+            "Не бійся почати з початку.",
+            "Працюй серцем, і результат перевершить очікування."
+        ];
 
-    const aiQuotes = [
-      "ШІ не замінить людину — він підсилить того, хто готовий вчитися.",
-      "Автоматизація — це шлях до більшої креативності.",
-      "Використовуй ШІ, щоб зосередитись на ідеях, а не на рутині.",
-      "Той, хто вміє працювати з ШІ, має перевагу майбутнього.",
-      "Штучний інтелект — інструмент, а не загроза.",
-      "ШІ допомагає бачити закономірності там, де інші бачать хаос.",
-      "Дані — це пальне для ШІ, а креативність — це його двигун.",
-      "Людина + ШІ = команда, що перемагає.",
-      "Навчи ШІ працювати на тебе, а не замість тебе.",
-      "Використовуй аналітику ШІ, щоб ухвалювати точні рішення.",
-      "Інновації починаються там, де є цікавість і ШІ.",
-      "ШІ — це не майбутнє, це сьогодення.",
-      "Відкрий можливості ШІ — і відкриєш нові горизонти.",
-      "Штучний інтелект робить роботу розумнішою, а не важчою.",
-      "Розвивай навички ШІ, щоб розвивати себе.",
-      "Поєднуй людську емпатію і машинну точність.",
-      "ШІ не помиляється — він навчається.",
-      "Кожна автоматизація — це крок до стратегічного мислення.",
-      "Довіряй ШІ, але перевіряй дані.",
-      "ШІ дає час на головне — людяність і творчість."
-    ];
+        const aiQuotes = [
+            "ШІ не замінить людину — він підсилить того, хто готовий вчитися.",
+            "Автоматизація — це шлях до більшої креативності.",
+            "Використовуй ШІ, щоб зосередитись на ідеях, а не на рутині.",
+            "Той, хто вміє працювати з ШІ, має перевагу майбутнього.",
+            "Штучний інтелект — інструмент, а не загроза.",
+            "ШІ допомагає бачити закономірності там, де інші бачать хаос.",
+            "Дані — це пальне для ШІ, а креативність — це його двигун.",
+            "Людина + ШІ = команда, що перемагає.",
+            "Навчи ШІ працювати на тебе, а не замість тебе.",
+            "Використовуй аналітику ШІ, щоб ухвалювати точні рішення.",
+            "Інновації починаються там, де є цікавість і ШІ.",
+            "ШІ — це не майбутнє, це сьогодення.",
+            "Відкрий можливості ШІ — і відкриєш нові горизонти.",
+            "Штучний інтелект робить роботу розумнішою, а не важчою.",
+            "Розвивай навички ШІ, щоб розвивати себе.",
+            "Поєднуй людську емпатію і машинну точність.",
+            "ШІ не помиляється — він навчається.",
+            "Кожна автоматизація — це крок до стратегічного мислення.",
+            "Довіряй ШІ, але перевіряй дані.",
+            "ШІ дає час на головне — людяність і творчість."
+        ];
 
-    const today = new Date();
-    const startOfYear = new Date(today.getFullYear(), 0, 1);
-    const dayNumber = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24));
-    const isAI = dayNumber % 2 === 0;
-    const quotes = isAI ? aiQuotes : generalQuotes;
-    const quote = quotes[dayNumber % quotes.length];
+        // --- Логіка цитат (залишається без змін) ---
+        const today = new Date();
+        const startOfYear = new Date(today.getFullYear(), 0, 1);
+        const dayNumber = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24));
+        const isAI = dayNumber % 2 === 0;
+        const quotes = isAI ? aiQuotes : generalQuotes;
+        const quote = quotes[dayNumber % quotes.length];
 
-    document.getElementById('quote').textContent = quote;
+        document.getElementById('quote').textContent = quote;
 
-    // --- МОДИФІКОВАНА ЧАСТИНА ---
-    // Встановлюємо цільову дату: 25 січня 2026 року (Місяці в JS нумеруються з 0, де 0 = січень)
-    const targetDate = new Date(2026, 0, 25);
-    
-    function updateTimer(){
-      const now = new Date();
-      const diff = targetDate - now; // Використовуємо нову цільову дату
-      
-      if(diff <= 0){
-        document.getElementById('countdown').textContent = 'Час настав!';
-        clearInterval(timerInterval); // Зупиняємо таймер
-        return;
-      }
-      
-      const days = Math.floor(diff / (1000*60*60*24));
-      const hours = Math.floor((diff / (1000*60*60)) % 24);
-      const minutes = Math.floor((diff / (1000*60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-      
-      document.getElementById('countdown').textContent = `${days}д ${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-    }
+        // --- ЛОГІКА ТАЙМЕРА (змінено на 25.01.2026) ---
+        // Встановлюємо цільову дату: 25 січня 2026 року (Місяці в JS нумеруються з 0, де 0 = січень)
+        const targetDate = new Date(2026, 0, 25);
+        
+        function updateTimer(){
+            const now = new Date();
+            const diff = targetDate - now; 
+            
+            if(diff <= 0){
+                document.getElementById('countdown').textContent = 'Час настав!';
+                clearInterval(timerInterval); // Зупиняємо таймер
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+            
+            // Форматування виводу: 123д 05:45:30
+            document.getElementById('countdown').textContent = 
+                `${days}д ${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        }
 
-    // Запускаємо таймер і оновлюємо його кожну секунду
-    updateTimer();
-    const timerInterval = setInterval(updateTimer, 1000);
-  </script>
+        // Запускаємо таймер і оновлюємо його кожну секунду
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+    </script>
 </body>
 </html>
